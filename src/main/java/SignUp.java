@@ -40,11 +40,16 @@ public class SignUp {
         driver.findElement(By.cssSelector("[value='Register']")).click();
     }
 
-    @Test(priority = 0)
+
     public void openRegisterPage() {
+        driver.get("http://parabank.parasoft.com");
+    }
+
+    @Test()
+    public void shouldOpenRegisterPage() {
         String register = "[href^='register.htm']";
 
-        driver.get("http://parabank.parasoft.com");
+        openRegisterPage();
         isElementDisplayed(register, true);
         driver.findElement(By.cssSelector(register)).sendKeys(Keys.RETURN);
     }
