@@ -15,5 +15,10 @@ public class SignIn {
         driver.findElement(By.cssSelector("div .login .button")).click();
     }
 
+    @Test(priority = 1)
+    public void shouldLogin() {
+        driver.get("http://parabank.parasoft.com");
+        login("test", "test");
+    }
 
 }
