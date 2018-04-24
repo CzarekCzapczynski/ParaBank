@@ -49,6 +49,8 @@ public class SignIn {
         driver.get("http://parabank.parasoft.com");
         waitForJStoLoad();
         login("test", "test");
+        waitForJStoLoad();
+        Assert.assertTrue(driver.findElement(By.cssSelector("a[href$='logout.htm']")).isDisplayed());
     }
 
 }
