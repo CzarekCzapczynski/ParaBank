@@ -72,7 +72,7 @@ public class SignUp {
         String password = "pass1234";
         String error = "[id='customer.username.errors']";
 
-        for (int i=1; i<=2; i++) {
+        for (int i=1; i<=3; i++) {
             openRegisterPage();
             register("Ogórek", "Szklarniowy",
                     "Ogórkowa", "Grządki", "Pole", "0000",
