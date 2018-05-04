@@ -8,7 +8,7 @@ public class IndexPage extends MainPage {
         super(driver);
     }
 
-    public void openParaBank() {
+    public void openIndexPage() {
         driver.get("http://parabank.parasoft.com");
     }
 
@@ -20,7 +20,11 @@ public class IndexPage extends MainPage {
         driver.findElement(By.cssSelector("[name='password']")).sendKeys(password);
     }
 
-    public void clickLogin() {
+    public void clickLoginButton() {
         driver.findElement(By.cssSelector(".login .button")).click();
+    }
+
+    public boolean isErrorDuringLogin(By by) {
+        return driver.findElement(by).isDisplayed();
     }
 }

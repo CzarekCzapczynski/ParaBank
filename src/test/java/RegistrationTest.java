@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class SignUp {
+public class RegistrationTest {
     WebDriver driver = new ChromeDriver();
 
     public void isElementDisplayed(String elementParam, boolean isCSS) {
