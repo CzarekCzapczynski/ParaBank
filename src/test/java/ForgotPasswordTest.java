@@ -7,5 +7,5 @@ public class ForgotPasswordTest {
         WebDriver driver;
         LookupPage lookupPage;
         AccountPage accountPage;
-
     }
+}
