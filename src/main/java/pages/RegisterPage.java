@@ -2,74 +2,109 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 
 public class RegisterPage extends MainPage {
+    @FindBy(css = "[id='customer.firstName']")
+    private WebElement firstNameInput;
+
+    @FindBy(css = "[id='customer.firstName']")
+    private WebElement lastNameInput;
+
+    @FindBy(css = "[id$='street']")
+    private WebElement streetInput;
+
+    @FindBy(css = "[id$='city']")
+    private WebElement cityInput;
+
+    @FindBy(css = "[id$='state']")
+    private WebElement stateInput;
+
+    @FindBy(css = "[id$='zipCode']")
+    private WebElement zipCodeInput;
+
+    @FindBy(css = "[id$='ssn']")
+    private WebElement ssnInput;
+
+    @FindBy(css = "[id$='username']")
+    private WebElement usernameInput;
+
+    @FindBy(css = "[id$='password']")
+    private WebElement passwordInput;
+
+    @FindBy(css = "#repeatedPassword")
+    private WebElement repeatedPasswordInput;
+
+    @FindBy(css = "[value='Register']")
+    private WebElement registerButton;
+
     public RegisterPage(WebDriver driver) {
         super(driver);
     }
 
-    public void openRegisterPage() {
+    public RegisterPage openRegisterPage() {
         driver.get("http://parabank.parasoft.com/parabank/register.htm");
+        this.waitForJStoLoad();
+        return this;
     }
 
-    public void setFirstName(String firstName){
-        driver.findElement(By.cssSelector("[id='customer.firstName']")).sendKeys(firstName);
+    public RegisterPage setFirstName(String firstName){
+        firstNameInput.sendKeys(firstName);
+        return this;
     }
 
-    public void setLastName(String lastName) {
-        driver.findElement(By.cssSelector("[id='customer.lastName']")).sendKeys(lastName);
+    public RegisterPage setLastName(String lastName) {
+        lastNameInput.sendKeys(lastName);
+        return this;
     }
 
-    public void setStreet(String street) {
-        driver.findElement(By.cssSelector("[id$='street']")).sendKeys(street);
+    public RegisterPage setStreet(String street) {
+        streetInput.sendKeys(street);
+        return this;
     }
 
-    public void setCity(String city) {
-        driver.findElement(By.cssSelector("[id$='city']")).sendKeys(city);
+    public RegisterPage setCity(String city) {
+       cityInput.sendKeys(city);
+       return this;
     }
 
-    public void setState(String state) {
-        driver.findElement(By.cssSelector("[id$='state']")).sendKeys(state);
+    public RegisterPage setState(String state) {
+        streetInput.sendKeys(state);
+        return this;
     }
 
-    public void setZipCode(String zipCode) {
-        driver.findElement(By.cssSelector("[id$='zipCode']")).sendKeys(zipCode);
-    }
-    public void setSsn(String ssn) {
-        driver.findElement(By.cssSelector("[id$='ssn']")).sendKeys(ssn);
+    public RegisterPage setZipCode(String zipCode) {
+        zipCodeInput.sendKeys(zipCode);
+        return this;
     }
 
-    public void setUsername(String username) {
-        driver.findElement(By.cssSelector("[id$='username']")).sendKeys(username);
+    public RegisterPage setSsn(String ssn) {
+        ssnInput.sendKeys(ssn);
+        return this;
     }
 
-    public void setPassword(String password) {
-        driver.findElement(By.cssSelector("[id$='password']")).sendKeys(password);
+    public RegisterPage setUsername(String username) {
+        usernameInput.sendKeys(username);
+        return this;
     }
 
-    public void setRepeatedPassword(String repeatedPassword) {
-        driver.findElement(By.cssSelector("#repeatedPassword")).sendKeys(repeatedPassword);
+    public RegisterPage setPassword(String password) {
+        passwordInput.sendKeys(password);
+        return this;
     }
 
-    public void clickRegisterButton() {
-        driver.findElement(By.cssSelector("[value='Register']")).click();
+    public RegisterPage setRepeatedPassword(String repeatedPassword) {
+        repeatedPasswordInput.sendKeys(repeatedPassword);
+        return this;
     }
 
-    public void fillRegisterForm(String firstName, String lastName,
-                                 String street, String city, String state, String zipCode,
-                                 String ssn,
-                                 String username, String password, String repeatedPassword) {
-        setFirstName(firstName);
-        setLastName(lastName);
-        setStreet(street);
-        setCity(city);
-        setState(state);
-        setZipCode(zipCode);
-        setSsn(ssn);
-        setUsername(username);
-        setPassword(password);
-        setRepeatedPassword(repeatedPassword);
+    public RegisterPage clickRegisterButton() {
+        registerButton.click();
+        this.waitForJStoLoad();
+        return this;
     }
+
 
     public boolean isErrorDuringExecution(By by) {
         return driver.findElement(by).isDisplayed();

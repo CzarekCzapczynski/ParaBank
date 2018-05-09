@@ -2,26 +2,46 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class IndexPage extends MainPage {
+    @FindBy(css="[name='username']")
+    private WebElement userNameInput;
+
+    @FindBy(css="[name='password']")
+    private WebElement passwordInput;
+
+    @FindBy(css=".login .button")
+    private WebElement loginButton;
+
+
     public IndexPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
     }
 
-    public void openIndexPage() {
+    public IndexPage openIndexPage() {
         driver.get("http://parabank.parasoft.com");
+        this.waitForJStoLoad();
+        return this;
     }
 
-    public void fillUserName(String username){
-        driver.findElement(By.cssSelector("[name='username']")).sendKeys(username);
+    public IndexPage setUserName(String username){
+        userNameInput.sendKeys(username);
+        return this;
     }
 
-    public void fillPassword(String password) {
-        driver.findElement(By.cssSelector("[name='password']")).sendKeys(password);
+    public IndexPage setPassword(String password) {
+        passwordInput.sendKeys(password);
+        return this;
     }
 
-    public void clickLoginButton() {
-        driver.findElement(By.cssSelector(".login .button")).click();
+    public AccountPage clickLoginButton() {
+        loginButton.click();
+        this.waitForJStoLoad();
+        return new AccountPage(driver);
     }
 
     public boolean isErrorDuringLogin(By by) {
