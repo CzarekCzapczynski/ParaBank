@@ -1,5 +1,6 @@
 package assertions;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,7 +23,12 @@ public class LoginAssertion extends MainPage{
         Assert.assertTrue(userInfoElements.size()!=0);
     }
 
-//    public boolean isUserLoggedIn(){
-//        return driver.findElement(By.cssSelector("a[href$='logout.htm']")).isDisplayed();
-//    }
+    public void isUserNotLoggedIn(){
+        Assert.assertTrue(userInfoElements.size()==0);
+    }
+
+    public void isErrorDisplayed(String errorMessage) {
+        String xpathSelector = "//p[contains(.,'" + errorMessage + "')]";
+        Assert.assertTrue(driver.findElement(By.xpath(xpathSelector)).isDisplayed());
+    }
 }

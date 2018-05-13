@@ -1,15 +1,19 @@
 package pages;
 
+import assertions.RegistrationAssertion;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class RegisterPage extends MainPage {
+    public RegistrationAssertion registrationAssertion;
+
     @FindBy(css = "[id='customer.firstName']")
     private WebElement firstNameInput;
 
-    @FindBy(css = "[id='customer.firstName']")
+    @FindBy(css = "[id='customer.lastName']")
     private WebElement lastNameInput;
 
     @FindBy(css = "[id$='street']")
@@ -41,12 +45,13 @@ public class RegisterPage extends MainPage {
 
     public RegisterPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
+        registrationAssertion = new RegistrationAssertion(driver);
     }
 
     public RegisterPage openRegisterPage() {
-        driver.get("http://parabank.parasoft.com/parabank/register.htm");
-        this.waitForJStoLoad();
-        return this;
+        openMainPage().clickRegisterLink();
+        return new RegisterPage(driver);
     }
 
     public RegisterPage setFirstName(String firstName){
@@ -70,7 +75,7 @@ public class RegisterPage extends MainPage {
     }
 
     public RegisterPage setState(String state) {
-        streetInput.sendKeys(state);
+        stateInput.sendKeys(state);
         return this;
     }
 
@@ -102,6 +107,23 @@ public class RegisterPage extends MainPage {
     public RegisterPage clickRegisterButton() {
         registerButton.click();
         this.waitForJStoLoad();
+        return this;
+    }
+
+    public RegisterPage fillRegisterForm(String firstName, String lastName,
+                              String street, String city, String state, String zipCode,
+                              String ssn,
+                              String username, String password, String repeatedPassword) {
+        setFirstName(firstName)
+        .setLastName(lastName)
+        .setStreet(street)
+        .setCity(city)
+        .setState(state)
+        .setZipCode(zipCode)
+        .setSsn(ssn)
+        .setUsername(username)
+        .setPassword(password)
+        .setRepeatedPassword(repeatedPassword);
         return this;
     }
 

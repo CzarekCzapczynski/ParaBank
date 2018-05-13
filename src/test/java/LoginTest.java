@@ -1,5 +1,3 @@
-import org.openqa.selenium.*;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginTest extends MainTest{
@@ -17,8 +15,6 @@ public class LoginTest extends MainTest{
             .setPassword("password")
             .clickLoginButton()
             .loginAssertion.isUserLoggedIn();
-
-//        Assert.assertTrue(accountPage.isUserLoggedIn());
     }
 
     @Test
@@ -26,9 +22,8 @@ public class LoginTest extends MainTest{
         indexPage.openIndexPage()
             .setUserName("")
             .setPassword("password")
-            .clickLoginButton();
-
-        Assert.assertTrue(indexPage.isErrorDuringLogin(By.cssSelector(".error")));
+            .clickLoginButton()
+            .loginAssertion.isUserNotLoggedIn();
     }
 
     @Test
@@ -36,10 +31,9 @@ public class LoginTest extends MainTest{
         indexPage.openIndexPage()
                 .setUserName("test")
                 .setPassword("")
-                .clickLoginButton();
-
-        Assert.assertTrue(indexPage.isErrorDuringLogin(By.xpath(
-                "//p[contains(.,'Please enter a username and password.')]")));
+                .clickLoginButton()
+//                .loginAssertion.isUserNotLoggedIn();
+                .loginAssertion.isErrorDisplayed("Please enter a username and password.");
     }
 
     @Test
@@ -47,8 +41,8 @@ public class LoginTest extends MainTest{
         indexPage.openIndexPage()
                 .setUserName("test")
                 .setPassword("test")
-                .clickLoginButton();
-
-        Assert.assertTrue(indexPage.isErrorDuringLogin(By.xpath("//p[contains(.,'could not be verified')]")));
+                .clickLoginButton()
+//                .loginAssertion.isUserNotLoggedIn();
+                .loginAssertion.isErrorDisplayed("The username and password could not be verified.");
     }
 }

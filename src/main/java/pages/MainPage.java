@@ -1,16 +1,23 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class MainPage {
-    protected WebDriver driver;
+    public WebDriver driver;
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
     }
+
+    @FindBy(css="a[href^='register.htm']")
+    public WebElement registerLink;
 
     public boolean waitForJStoLoad() {
         WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -40,5 +47,22 @@ public class MainPage {
             }
         };
         return wait.until(jQueryLoad) && wait.until(jsLoad);
+    }
+
+    public MainPage openMainPage() {
+        driver.get("http://parabank.parasoft.com");
+        this.waitForJStoLoad();
+        return this;
+    }
+
+    public RegisterPage clickRegisterLink() {
+        registerLink.click();
+        this.waitForJStoLoad();
+        return new RegisterPage(driver);
+    }
+
+    public void isErrorDisplayed(String errorMessage) {
+        String xpathSelector = "//span[contains(.,'" + errorMessage + "')]";
+        Assert.assertTrue(driver.findElement(By.xpath(xpathSelector)).isDisplayed());
     }
 }

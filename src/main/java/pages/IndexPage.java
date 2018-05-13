@@ -44,7 +44,4 @@ public class IndexPage extends MainPage {
         return new AccountPage(driver);
     }
 
-    public boolean isErrorDuringLogin(By by) {
-        return driver.findElement(by).isDisplayed();
-    }
 }
