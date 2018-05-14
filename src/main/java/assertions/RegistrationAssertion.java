@@ -21,4 +21,8 @@ public class RegistrationAssertion extends MainPage{
         Assert.assertTrue(userCreated.isDisplayed());
     }
 
+    public void isErrorDisplayed(String errorMessage) {
+        String xpathSelector = "//span[contains(.,'" + errorMessage + "')]";
+        Assert.assertTrue(driver.findElement(By.xpath(xpathSelector)).isDisplayed());
+    }
 }

@@ -32,7 +32,6 @@ public class LoginTest extends MainTest{
                 .setUserName("test")
                 .setPassword("")
                 .clickLoginButton()
-//                .loginAssertion.isUserNotLoggedIn();
                 .loginAssertion.isErrorDisplayed("Please enter a username and password.");
     }
 
@@ -42,7 +41,6 @@ public class LoginTest extends MainTest{
                 .setUserName("test")
                 .setPassword("test")
                 .clickLoginButton()
-//                .loginAssertion.isUserNotLoggedIn();
                 .loginAssertion.isErrorDisplayed("The username and password could not be verified.");
     }
 }

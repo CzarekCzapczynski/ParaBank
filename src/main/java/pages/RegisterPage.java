@@ -1,7 +1,6 @@
 package pages;
 
 import assertions.RegistrationAssertion;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -125,10 +124,5 @@ public class RegisterPage extends MainPage {
         .setPassword(password)
         .setRepeatedPassword(repeatedPassword);
         return this;
-    }
-
-
-    public boolean isErrorDuringExecution(By by) {
-        return driver.findElement(by).isDisplayed();
     }
 }

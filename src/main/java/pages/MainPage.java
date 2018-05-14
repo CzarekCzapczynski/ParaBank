@@ -1,13 +1,11 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 public class MainPage {
     public WebDriver driver;
@@ -61,8 +59,4 @@ public class MainPage {
         return new RegisterPage(driver);
     }
 
-    public void isErrorDisplayed(String errorMessage) {
-        String xpathSelector = "//span[contains(.,'" + errorMessage + "')]";
-        Assert.assertTrue(driver.findElement(By.xpath(xpathSelector)).isDisplayed());
-    }
 }

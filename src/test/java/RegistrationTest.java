@@ -15,7 +15,7 @@ public class RegistrationTest extends MainTest {
                 .setState("Pole")
                 .setZipCode("0000")
                 .setSsn("11")
-                .setUsername("ogor116")
+                .setUsername("ogor1165")
                 .setPassword(password)
                 .setRepeatedPassword(password)
                 .clickRegisterButton()
