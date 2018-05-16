@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import scenarios.Scenario;
 
-public class MainPage {
+public abstract class MainPage {
     public WebDriver driver;
 
     public MainPage(WebDriver driver) {
