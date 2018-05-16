@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import scenarios.Scenario;
 
 public class MainPage {
     public WebDriver driver;
@@ -47,16 +48,7 @@ public class MainPage {
         return wait.until(jQueryLoad) && wait.until(jsLoad);
     }
 
-    public MainPage openMainPage() {
-        driver.get("http://parabank.parasoft.com");
-        this.waitForJStoLoad();
-        return this;
+    public <I extends MainPage, O extends MainPage> O run(Scenario<I,O> scenario){
+        return scenario.run((I) this);
     }
-
-    public RegisterPage clickRegisterLink() {
-        registerLink.click();
-        this.waitForJStoLoad();
-        return new RegisterPage(driver);
-    }
-
 }

@@ -43,4 +43,9 @@ public class IndexPage extends MainPage {
         return new AccountPage(driver);
     }
 
+    public RegisterPage clickRegisterLink() {
+        registerLink.click();
+        this.waitForJStoLoad();
+        return new RegisterPage(driver);
+    }
 }

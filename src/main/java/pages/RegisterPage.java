@@ -42,16 +42,19 @@ public class RegisterPage extends MainPage {
     @FindBy(css = "[value='Register']")
     private WebElement registerButton;
 
+    @FindBy(css = "[href*='logout.htm']")
+    private WebElement logoutLink;
+
     public RegisterPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
         registrationAssertion = new RegistrationAssertion(driver);
     }
 
-    public RegisterPage openRegisterPage() {
-        openMainPage().clickRegisterLink();
-        return new RegisterPage(driver);
-    }
+//    public RegisterPage openRegisterPage() {
+//        openMainPage().clickRegisterLink();
+//        return new RegisterPage(driver);
+//    }
 
     public RegisterPage setFirstName(String firstName){
         firstNameInput.sendKeys(firstName);
@@ -124,5 +127,10 @@ public class RegisterPage extends MainPage {
         .setPassword(password)
         .setRepeatedPassword(repeatedPassword);
         return this;
+    }
+
+    public IndexPage logout() {
+        logoutLink.click();
+        return new IndexPage(driver);
     }
 }

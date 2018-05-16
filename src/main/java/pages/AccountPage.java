@@ -4,7 +4,7 @@ import assertions.LoginAssertion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class AccountPage extends MainPage{
+public class AccountPage extends LoggedInPage{
 
     public LoginAssertion loginAssertion;
 

@@ -1,5 +1,6 @@
 import org.testng.annotations.Test;
 import pages.RegisterPage;
+import scenarios.RegisterScenario;
 
 public class RegistrationTest extends MainTest {
 
@@ -7,45 +8,65 @@ public class RegistrationTest extends MainTest {
     public void shouldRegister() {
         String password = "pass1234";
 
-        registerPage.openRegisterPage()
-                .setFirstName("Ogórek")
-                .setLastName("Szklarniowy")
-                .setStreet("Ogórkowa")
-                .setCity("Grządki")
-                .setState("Pole")
-                .setZipCode("0000")
-                .setSsn("11")
-                .setUsername("ogor1165")
-                .setPassword(password)
-                .setRepeatedPassword(password)
-                .clickRegisterButton()
+        indexPage.run(new RegisterScenario(
+                "Ogórek",
+                "Szklarniowy",
+                "Ogórkowa",
+                "Grządki",
+                "Pole",
+                "0000",
+                "11",
+                "ogor1165",
+                password,
+                password))
                 .registrationAssertion.isUserRegister();
     }
 
     @Test
     public void shouldNotRegisterUserExists() {
         String password = "pass1234";
-        RegisterPage register = new RegisterPage(driver);
 
-        for (int i=1; i<=3; i++) {
-            register = registerPage.openRegisterPage()
-                    .fillRegisterForm("Ogórek", "Szklarniowy",
-                            "Ogórkowa", "Grządki", "Pole", "0000",
-                            "11", "ogor2", password ,password)
-                    .clickRegisterButton();
-        }
-        register.registrationAssertion.isErrorDisplayed("This username already exists.");
+        indexPage.run(new RegisterScenario(
+                "Ogórek",
+                "Szklarniowy",
+                "Ogórkowa",
+                "Grządki",
+                "Pole",
+                "0000",
+                "11",
+                "ogor23",
+                password,
+                password))
+                .logout()
+                .run(new RegisterScenario(
+                "Ogórek",
+                "Szklarniowy",
+                "Ogórkowa",
+                "Grządki",
+                "Pole",
+                "0000",
+                "11",
+                "ogor23",
+                password,
+                password))
+                .registrationAssertion.isErrorDisplayed("This username already exists.");
     }
 
     @Test
     public void shouldNotRegisterPasswordsDidNotMatch() {
         String password = "pass1234";
 
-        registerPage.openRegisterPage()
-                .fillRegisterForm("Ogórek", "Szklarniowy",
-                        "Ogórkowa", "Grządki", "Pole", "0000",
-                        "11", "ogor3", password ,password + "a")
-                .clickRegisterButton()
+        indexPage.run(new RegisterScenario(
+                "Ogórek",
+                "Szklarniowy",
+                "Ogórkowa",
+                "Grządki",
+                "Pole",
+                "0000",
+                "11",
+                "ogor3",
+                password ,
+                password + "a"))
                 .registrationAssertion.isErrorDisplayed("Passwords did not match.");
     }
 
@@ -53,11 +74,17 @@ public class RegistrationTest extends MainTest {
     public void shouldNotRegisterRequiredUsername() {
         String password = "pass1234";
 
-        registerPage.openRegisterPage()
-                .fillRegisterForm("Ogórek", "Szklarniowy",
-                        "Ogórkowa", "Grządki", "Pole", "0000",
-                        "11", "", password ,password)
-                .clickRegisterButton()
+        indexPage.run(new RegisterScenario(
+                "Ogórek",
+                "Szklarniowy",
+                "Ogórkowa",
+                "Grządki",
+                "Pole",
+                "0000",
+                "11",
+                "",
+                password,
+                password))
                 .registrationAssertion.isErrorDisplayed("Username is required.");
     }
 }
