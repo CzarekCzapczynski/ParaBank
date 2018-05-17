@@ -112,23 +112,6 @@ public class RegisterPage extends MainPage {
         return this;
     }
 
-    public RegisterPage fillRegisterForm(String firstName, String lastName,
-                              String street, String city, String state, String zipCode,
-                              String ssn,
-                              String username, String password, String repeatedPassword) {
-        setFirstName(firstName)
-        .setLastName(lastName)
-        .setStreet(street)
-        .setCity(city)
-        .setState(state)
-        .setZipCode(zipCode)
-        .setSsn(ssn)
-        .setUsername(username)
-        .setPassword(password)
-        .setRepeatedPassword(repeatedPassword);
-        return this;
-    }
-
     public IndexPage logout() {
         logoutLink.click();
         return new IndexPage(driver);

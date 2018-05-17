@@ -77,21 +77,7 @@ public class LookupPage extends MainPage{
 
     public LookupPage clickFindMyLoginInfoButton() {
         findMyLoginInfoButton.click();
+        this.waitForJStoLoad();
         return this;
-    }
-
-    public void fillLookupForm(String firstName, String lastName,
-                                 String street, String city, String state, String zipCode, String ssn) {
-        setFirstName(firstName);
-        setLastName(lastName);
-        setStreet(street);
-        setCity(city);
-        setState(state);
-        setZipCode(zipCode);
-        setSsn(ssn);
-    }
-
-    public boolean isExecutionPassed(By by) {
-        return driver.findElement(by).isDisplayed();
     }
 }
