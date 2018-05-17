@@ -1,47 +1,83 @@
 package pages;
 
+import assertions.LookupAssertion;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LookupPage extends MainPage{
-    public LookupPage(WebDriver driver) {
+    public LookupAssertion lookupAssertion;
+
+    @FindBy(css = "#firstName")
+    private WebElement firstNameInput;
+
+    @FindBy(css = "#lastName")
+    private WebElement lastNameInput;
+
+    @FindBy(css = "[id$='street']")
+    private WebElement streetInput;
+
+    @FindBy(css = "[id$='city']")
+    private WebElement cityInput;
+
+    @FindBy(css = "[id$='state']")
+    private WebElement stateInput;
+
+    @FindBy(css = "[id$='zipCode']")
+    private WebElement zipCodeInput;
+
+    @FindBy(css = "#ssn")
+    private WebElement ssnInput;
+
+    @FindBy(css = "[value^='Find']")
+    private WebElement findMyLoginInfoButton;
+
+    public LookupPage (WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
+        lookupAssertion = new LookupAssertion(driver);
     }
 
-    public void openLookupPage() {
-        driver.get("http://parabank.parasoft.com/parabank/lookup.htm");
+    public LookupPage setFirstName(String firstName){
+        firstNameInput.sendKeys(firstName);
+        return this;
     }
 
-    public void setFirstName(String firstName){
-        driver.findElement(By.cssSelector("#firstName")).sendKeys(firstName);
+    public LookupPage setLastName(String lastName) {
+        lastNameInput.sendKeys(lastName);
+        return this;
     }
 
-    public void setLastName(String lastName) {
-        driver.findElement(By.cssSelector("#lastName")).sendKeys(lastName);
+    public LookupPage setStreet(String street) {
+        streetInput.sendKeys(street);
+        return this;
     }
 
-    public void setStreet(String street) {
-        driver.findElement(By.cssSelector("[id$='street']")).sendKeys(street);
+    public LookupPage setCity(String city) {
+        cityInput.sendKeys(city);
+        return this;
     }
 
-    public void setCity(String city) {
-        driver.findElement(By.cssSelector("[id$='city']")).sendKeys(city);
+    public LookupPage setState(String state) {
+        stateInput.sendKeys(state);
+        return this;
     }
 
-    public void setState(String state) {
-        driver.findElement(By.cssSelector("[id$='state']")).sendKeys(state);
+    public LookupPage setZipCode(String zipCode) {
+        zipCodeInput.sendKeys(zipCode);
+        return this;
     }
 
-    public void setZipCode(String zipCode) {
-        driver.findElement(By.cssSelector("[id$='zipCode']")).sendKeys(zipCode);
+    public LookupPage setSsn(String ssn) {
+        ssnInput.sendKeys(ssn);
+        return this;
     }
 
-    public void setSsn(String ssn) {
-        driver.findElement(By.cssSelector("#ssn")).sendKeys(ssn);
-    }
-
-    public void clickFindMyLoginInfoButton() {
-        driver.findElement(By.cssSelector("[value^='Find']")).click();
+    public LookupPage clickFindMyLoginInfoButton() {
+        findMyLoginInfoButton.click();
+        return this;
     }
 
     public void fillLookupForm(String firstName, String lastName,

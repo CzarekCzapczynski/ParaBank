@@ -9,7 +9,6 @@ import pages.RegisterPage;
 
 public class MainTest {
     WebDriver driver;
-    MainPage mainPage;
     IndexPage indexPage;
     AccountPage accountPage;
     RegisterPage registerPage;
@@ -18,7 +17,6 @@ public class MainTest {
     @BeforeMethod
     public void before(){
         driver = new ChromeDriver();
-        mainPage = new MainPage(driver);
         indexPage = new IndexPage(driver);
         accountPage = new AccountPage(driver);
         registerPage = new RegisterPage(driver);
@@ -26,7 +24,7 @@ public class MainTest {
 
     @AfterMethod
     public void after(){
-        driver.close();
+//        driver.close();
     }
 
 }

@@ -15,6 +15,9 @@ public class IndexPage extends MainPage {
     @FindBy(css=".login .button")
     private WebElement loginButton;
 
+    @FindBy(css = "[href*='lookup.htm']")
+    private WebElement forgotLoginInfoLink;
+
 
     public IndexPage(WebDriver driver) {
         super(driver);
@@ -47,5 +50,11 @@ public class IndexPage extends MainPage {
         registerLink.click();
         this.waitForJStoLoad();
         return new RegisterPage(driver);
+    }
+
+    public LookupPage clickForgotLoginInfoLink() {
+        forgotLoginInfoLink.click();
+        this.waitForJStoLoad();
+        return new LookupPage(driver);
     }
 }

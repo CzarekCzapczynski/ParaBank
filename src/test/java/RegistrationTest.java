@@ -16,7 +16,7 @@ public class RegistrationTest extends MainTest {
                 "Pole",
                 "0000",
                 "11",
-                "ogor1165",
+                "ogor2",
                 password,
                 password))
                 .registrationAssertion.isUserRegister();
