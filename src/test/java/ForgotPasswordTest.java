@@ -1,4 +1,3 @@
-
 import org.testng.annotations.Test;
 import scenarios.ForgotPasswordScenario;
 import scenarios.RegisterScenario;

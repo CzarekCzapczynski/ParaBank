@@ -1,4 +1,6 @@
 import org.testng.annotations.Test;
+import scenarios.LoginScenario;
+import scenarios.RegisterScenario;
 
 public class LoginTest extends MainTest{
 
@@ -10,37 +12,40 @@ public class LoginTest extends MainTest{
 
     @Test
     public void shouldLogin() {
-        indexPage.openIndexPage()
-            .setUserName("test")
-            .setPassword("password")
-            .clickLoginButton()
+        String username = "newUser";
+        String password = "pass1234";
+
+        indexPage.run(new RegisterScenario(
+                "test",
+                "test",
+                "test",
+                "test",
+                "test",
+                "0000",
+                "11",
+                username,
+                password,
+                password))
+                .logout()
+                .run(new LoginScenario(username, password))
             .loginAssertion.isUserLoggedIn();
     }
 
     @Test
     public void shouldNotLoginEmptyLogin() {
-        indexPage.openIndexPage()
-            .setUserName("")
-            .setPassword("password")
-            .clickLoginButton()
+        indexPage.run(new LoginScenario("", "password"))
             .loginAssertion.isUserNotLoggedIn();
     }
 
     @Test
     public void shouldNotLoginEmptyPassword() {
-        indexPage.openIndexPage()
-                .setUserName("test")
-                .setPassword("")
-                .clickLoginButton()
+        indexPage.run(new LoginScenario("test", ""))
                 .loginAssertion.isErrorDisplayed("Please enter a username and password.");
     }
 
     @Test
     public void shouldNotLoginBadPassword() {
-        indexPage.openIndexPage()
-                .setUserName("test")
-                .setPassword("test")
-                .clickLoginButton()
+        indexPage.run(new LoginScenario("test", "test"))
                 .loginAssertion.isErrorDisplayed("The username and password could not be verified.");
     }
 }

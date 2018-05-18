@@ -1,5 +1,4 @@
 import org.testng.annotations.Test;
-import pages.RegisterPage;
 import scenarios.RegisterScenario;
 
 public class RegistrationTest extends MainTest {
