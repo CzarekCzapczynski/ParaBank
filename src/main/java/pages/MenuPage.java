@@ -9,12 +9,20 @@ public class MenuPage extends MainPage{
     @FindBy(css = "[href*='overview.htm']")
     private WebElement accountsOverviewLink;
 
+    @FindBy(css = "[href*='openaccount.htm']")
+    private WebElement openNewAccountLink;
+
     public MenuPage(WebDriver driver) {
         super(driver);
     }
 
-    public AccountPage clickAccountsOverview(){
+    public AccountPage clickAccountsOverviewLink(){
         accountsOverviewLink.click();
+        return new AccountPage(driver);
+    }
+
+    public AccountPage clickOpenNewAccountLink() {
+        openNewAccountLink.click();
         return new AccountPage(driver);
     }
 }
