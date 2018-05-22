@@ -1,29 +1,38 @@
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.AccountPage;
 import scenarios.AddAccountScenario;
 import scenarios.LoginScenario;
 import scenarios.RegisterScenario;
 
 public class OpenNewAccountTest extends MainTest{
 
-    @Test
-    public void shouldOpenAccountWithoutSettingTypeAndFromAccount(){
+    private AccountPage start;
+
+    @BeforeMethod
+    public void beforeTest() {
         String username = this.getRandomString(5);
         String password = "pass1234";
 
-        indexPage
+        start = indexPage
                 .run(new RegisterScenario(
-                "test",
-                "test",
-                "test",
-                "test",
-                "test",
-                "0000",
-                "11",
-                username,
-                password,
-                password))
+                        "test",
+                        "test",
+                        "test",
+                        "test",
+                        "test",
+                        "0000",
+                        "11",
+                        username,
+                        password,
+                        password))
                 .logout()
-                .run(new LoginScenario(username, password))
+                .run(new LoginScenario(username, password));
+    }
+
+    @Test
+    public void shouldOpenAccountWithoutSettingTypeAndFromAccount(){
+        start
                 .leftMenu.clickOpenNewAccountLink()
                 .clickOpenNewAccountButton()
                 .openAccountAssertion.isNewAccountAdded();
@@ -31,27 +40,7 @@ public class OpenNewAccountTest extends MainTest{
 
     @Test
     public void shouldOpenAccount() {
-        String username = this.getRandomString(5);
-        String password = "pass1234";
-
-        indexPage
-                .run(new RegisterScenario(
-                        "test1",
-                        "test1",
-                        "test1",
-                        "test1",
-                        "test1",
-                        "0000",
-                        "11",
-                        username,
-                        password,
-                        password
-                ))
-                .logout()
-                .run(new LoginScenario(
-                        username,
-                        password
-                ))
+        start
                 .leftMenu.clickOpenNewAccountLink()
                 .setAccountType("SAVINGS")
                 .setFromAccountId("16563")
@@ -61,24 +50,7 @@ public class OpenNewAccountTest extends MainTest{
 
     @Test
     public void shouldNotLoginNotEnoughMoney() {
-        String username = this.getRandomString(5);
-        String password = "pass1234";
-
-        indexPage
-                .run(new RegisterScenario(
-                        "test1",
-                        "test1",
-                        "test1",
-                        "test1",
-                        "test1",
-                        "0000",
-                        "11",
-                        username,
-                        password,
-                        password
-                ))
-                .logout()
-                .run(new LoginScenario(username, password))
+        start
                 .leftMenu.clickOpenNewAccountLink()
                 .run(new AddAccountScenario("SAVINGS", "17007"))
                 .leftMenu.clickOpenNewAccountLink()
