@@ -7,11 +7,29 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MenuPage extends MainPage{
 
+    @FindBy(css = "[href*='openaccount.htm']")
+    private WebElement openNewAccountLink;
+
     @FindBy(css = "[href*='overview.htm']")
     private WebElement accountsOverviewLink;
 
-    @FindBy(css = "[href*='openaccount.htm']")
-    private WebElement openNewAccountLink;
+    @FindBy(css = "[href*='transfer.htm']")
+    private WebElement transferFundsLink;
+
+    @FindBy(css = "[href*='billpay.htm']")
+    private WebElement billPayLink;
+
+    @FindBy(css = "[href*='findtrans.htm']")
+    private WebElement findTransactionLink;
+
+    @FindBy(css = "[href*='updateprofile.htm']")
+    private WebElement updateContactInfoLink;
+
+    @FindBy(css = "[href*='requestloan.htm']")
+    private WebElement requestLoanLink;
+
+    @FindBy(css = "[href*='logout.htm']")
+    private WebElement logOutLink;
 
     public MenuPage(WebDriver driver) {
         super(driver);
@@ -28,5 +46,12 @@ public class MenuPage extends MainPage{
         openNewAccountLink.click();
         waitForJStoLoad();
         return new OpenAccountPage(driver);
+    }
+
+
+    public IndexPage clickLogOutLink() {
+        logOutLink.click();
+        waitForJStoLoad();
+        return new IndexPage(driver);
     }
 }

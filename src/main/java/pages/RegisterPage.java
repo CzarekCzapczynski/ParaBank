@@ -7,7 +7,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class RegisterPage extends MainPage {
-    public RegistrationAssertion registrationAssertion;
+//    public RegistrationAssertion registrationAssertion;
 
     @FindBy(css = "[id='customer.firstName']")
     private WebElement firstNameInput;
@@ -48,7 +48,7 @@ public class RegisterPage extends MainPage {
     public RegisterPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
-        registrationAssertion = new RegistrationAssertion(driver);
+//        registrationAssertion = new RegistrationAssertion(driver);
     }
 
 //    public RegisterPage openRegisterPage() {
@@ -106,14 +106,10 @@ public class RegisterPage extends MainPage {
         return this;
     }
 
-    public RegisterPage clickRegisterButton() {
+    public RegisterSuccessfulPage clickRegisterButton() {
         registerButton.click();
         this.waitForJStoLoad();
-        return this;
+        return new RegisterSuccessfulPage(driver);
     }
 
-    public IndexPage logout() {
-        logoutLink.click();
-        return new IndexPage(driver);
-    }
 }

@@ -12,7 +12,7 @@ public class LoginTest extends MainTest{
 
     @Test
     public void shouldLogin() {
-        String username = "newUser";
+        String username = getRandomString(5);
         String password = "pass1234";
 
         indexPage.run(new RegisterScenario(
@@ -26,7 +26,7 @@ public class LoginTest extends MainTest{
                 username,
                 password,
                 password))
-                .logout()
+                .leftMenu.clickLogOutLink()
                 .run(new LoginScenario(username, password))
             .loginAssertion.isUserLoggedIn();
     }

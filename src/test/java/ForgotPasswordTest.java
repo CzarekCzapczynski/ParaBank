@@ -27,7 +27,7 @@ public class ForgotPasswordTest extends MainTest{
                 username,
                 password,
                 password))
-                .logout()
+                .leftMenu.clickLogOutLink()
                 .run(new ForgotPasswordScenario(
                 firstName,
                 lastName,

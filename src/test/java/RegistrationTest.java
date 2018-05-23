@@ -5,6 +5,7 @@ public class RegistrationTest extends MainTest {
 
     @Test
     public void shouldRegister() {
+        String username = getRandomString(5);
         String password = "pass1234";
 
         indexPage.run(new RegisterScenario(
@@ -15,10 +16,10 @@ public class RegistrationTest extends MainTest {
                 "Pole",
                 "0000",
                 "11",
-                "ogor2",
+                username,
                 password,
                 password))
-                .registrationAssertion.isUserRegister();
+                .registerAssertion.isUserRegister();
     }
 
     @Test
@@ -36,7 +37,7 @@ public class RegistrationTest extends MainTest {
                 "ogor23",
                 password,
                 password))
-                .logout()
+                .leftMenu.clickLogOutLink()
                 .run(new RegisterScenario(
                 "Ogórek",
                 "Szklarniowy",
@@ -48,7 +49,7 @@ public class RegistrationTest extends MainTest {
                 "ogor23",
                 password,
                 password))
-                .registrationAssertion.isErrorDisplayed("This username already exists.");
+                .registerAssertion.isErrorDisplayed("This username already exists.");
     }
 
     @Test
@@ -66,7 +67,7 @@ public class RegistrationTest extends MainTest {
                 "ogor3",
                 password ,
                 password + "a"))
-                .registrationAssertion.isErrorDisplayed("Passwords did not match.");
+                .registerAssertion.isErrorDisplayed("Passwords did not match.");
     }
 
     @Test
@@ -84,6 +85,6 @@ public class RegistrationTest extends MainTest {
                 "",
                 password,
                 password))
-                .registrationAssertion.isErrorDisplayed("Username is required.");
+                .registerAssertion.isErrorDisplayed("Username is required.");
     }
 }

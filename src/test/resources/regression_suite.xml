@@ -1,0 +1,11 @@
+<suite name="Regression Suite">
+    <parameter name="url" value="http://parabank.parasoft.com"/>
+    <parameter name="login" value="admin12"/>
+    <parameter name="password" value="password1234"/>
+
+    <test name="Open New Account Test">
+        <classes>
+            <class name="OpenNewAccountTest"/>
+        </classes>
+    </test>
+</suite>

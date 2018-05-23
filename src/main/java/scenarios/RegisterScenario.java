@@ -1,9 +1,10 @@
 package scenarios;
 
+import pages.AccountPage;
 import pages.IndexPage;
-import pages.RegisterPage;
+import pages.RegisterSuccessfulPage;
 
-public class RegisterScenario implements Scenario <IndexPage, RegisterPage> {
+public class RegisterScenario implements Scenario <IndexPage, RegisterSuccessfulPage> {
 
     private String firstName, lastName, street, city, state, zipCode, ssn, username, password, repeatedPassword;
 
@@ -21,7 +22,7 @@ public class RegisterScenario implements Scenario <IndexPage, RegisterPage> {
         this.repeatedPassword = repeatedPassword;
     }
 
-    public RegisterPage run(IndexPage entry) {
+    public RegisterSuccessfulPage run(IndexPage entry) {
         return entry.openIndexPage()
                 .clickRegisterLink()
                 .setFirstName(firstName)

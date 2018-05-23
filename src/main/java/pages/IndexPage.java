@@ -1,11 +1,15 @@
 package pages;
 
+import assertions.LoginAssertion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class IndexPage extends MainPage {
+    private String url;
+    public LoginAssertion loginAssertion;
+
     @FindBy(css="[name='username']")
     private WebElement userNameInput;
 
@@ -19,13 +23,21 @@ public class IndexPage extends MainPage {
     private WebElement forgotLoginInfoLink;
 
 
+    public IndexPage(WebDriver driver, String url) {
+        super(driver);
+        PageFactory.initElements(driver, this);
+        this.loginAssertion = new LoginAssertion(driver);
+        this.url = url;
+    }
+
     public IndexPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+        this.loginAssertion = new LoginAssertion(driver);
     }
 
     public IndexPage openIndexPage() {
-        driver.get("http://parabank.parasoft.com");
+        driver.get(url);
         this.waitForJStoLoad();
         return this;
     }
