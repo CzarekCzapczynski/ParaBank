@@ -48,6 +48,34 @@ public class MenuPage extends MainPage{
         return new OpenAccountPage(driver);
     }
 
+    public TransferPage clickTransferFundsLink() {
+        transferFundsLink.click();
+        waitForJStoLoad();
+        return new TransferPage(driver);
+    }
+    public BillPayPage clickBillPayLink() {
+        billPayLink.click();
+        waitForJStoLoad();
+        return new BillPayPage(driver);
+    }
+
+    public FindTransactionPage clickfindTransactionLink() {
+        findTransactionLink.click();
+        waitForJStoLoad();
+        return new FindTransactionPage(driver);
+    }
+
+    public UpdateContactInfoPage clickUpdateContactInfoLink() {
+        updateContactInfoLink.click();
+        waitForJStoLoad();
+        return new UpdateContactInfoPage(driver);
+    }
+
+    public RequestLoanLinkPage clickRequestLoanLink() {
+        requestLoanLink.click();
+        waitForJStoLoad();
+        return new RequestLoanLinkPage(driver);
+    }
 
     public IndexPage clickLogOutLink() {
         logOutLink.click();
