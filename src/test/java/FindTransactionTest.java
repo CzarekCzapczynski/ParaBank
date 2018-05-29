@@ -7,7 +7,7 @@ import scenarios.AddAccountScenario;
 import scenarios.LoginScenario;
 import scenarios.RegisterScenario;
 
-public class OpenNewAccountTest extends MainTest{
+public class FindTransactionTest extends MainTest{
 
     private AccountPage start;
 
@@ -38,33 +38,11 @@ public class OpenNewAccountTest extends MainTest{
     }
 
     @Test
-    public void shouldOpenAccountWithoutSettingTypeAndFromAccount(){
+    public void shouldFindTransactionById(){
         start
-            .leftMenu.clickOpenNewAccountLink()
-            .clickOpenNewAccountButton()
-            .openAccountAssertion.isNewAccountAdded();
+            .leftMenu.clickfindTransactionLink()
+//            .setFindByTransactionIdInput("")
+        ;
     }
 
-    @Test
-    public void shouldOpenAccount() {
-        start
-            .run(new AddAccountScenario("SAVINGS", "16563"))
-            .openAccountAssertion.isNewAccountAdded();
-
-    }
-
-    @Test
-    public void shouldNotLoginNotEnoughMoney() {
-        start
-            .run(new AddAccountScenario("SAVINGS", "17007"))
-                .leftMenu.clickAccountsOverviewLink()
-            .run(new AddAccountScenario("CHECKING", "17007"))
-                .leftMenu.clickAccountsOverviewLink()
-            .run(new AddAccountScenario("SAVINGS", "17007"))
-                .leftMenu.clickAccountsOverviewLink()
-            .run(new AddAccountScenario("CHECKING", "17007"))
-                .leftMenu.clickAccountsOverviewLink()
-            .run(new AddAccountScenario("SAVINGS", "17007"))
-            .openAccountAssertion.isNewAccountNotAdded();
-    }
 }

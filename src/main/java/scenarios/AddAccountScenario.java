@@ -1,8 +1,9 @@
 package scenarios;
 
+import pages.AccountPage;
 import pages.OpenAccountPage;
 
-public class AddAccountScenario implements Scenario<OpenAccountPage, OpenAccountPage>{
+public class AddAccountScenario implements Scenario<AccountPage, OpenAccountPage>{
     private String accountType;
     private String FromAccountId;
 
@@ -11,8 +12,10 @@ public class AddAccountScenario implements Scenario<OpenAccountPage, OpenAccount
         this.FromAccountId = fromAccountId;
     }
 
-    public OpenAccountPage run(OpenAccountPage entry) {
-        return entry.setAccountType(accountType)
+    public OpenAccountPage run(AccountPage entry) {
+        return entry
+                .leftMenu.clickOpenNewAccountLink()
+                .setAccountType(accountType)
                 .setFromAccountId(FromAccountId)
                 .clickOpenNewAccountButton();
     }
