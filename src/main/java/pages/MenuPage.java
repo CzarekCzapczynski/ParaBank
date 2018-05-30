@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.ITestContext;
 
 public class MenuPage extends MainPage{
 
@@ -31,55 +32,55 @@ public class MenuPage extends MainPage{
     @FindBy(css = "[href*='logout.htm']")
     private WebElement logOutLink;
 
-    public MenuPage(WebDriver driver) {
-        super(driver);
+    public MenuPage(WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
     }
 
     public AccountPage clickAccountsOverviewLink(){
         accountsOverviewLink.click();
         waitForJStoLoad();
-        return new AccountPage(driver);
+        return new AccountPage(driver, getContext());
     }
 
     public OpenAccountPage clickOpenNewAccountLink() {
         openNewAccountLink.click();
         waitForJStoLoad();
-        return new OpenAccountPage(driver);
+        return new OpenAccountPage(driver, getContext());
     }
 
     public TransferPage clickTransferFundsLink() {
         transferFundsLink.click();
         waitForJStoLoad();
-        return new TransferPage(driver);
+        return new TransferPage(driver, getContext());
     }
     public BillPayPage clickBillPayLink() {
         billPayLink.click();
         waitForJStoLoad();
-        return new BillPayPage(driver);
+        return new BillPayPage(driver, getContext());
     }
 
     public FindTransactionPage clickfindTransactionLink() {
         findTransactionLink.click();
         waitForJStoLoad();
-        return new FindTransactionPage(driver);
+        return new FindTransactionPage(driver, getContext());
     }
 
     public UpdateContactInfoPage clickUpdateContactInfoLink() {
         updateContactInfoLink.click();
         waitForJStoLoad();
-        return new UpdateContactInfoPage(driver);
+        return new UpdateContactInfoPage(driver, getContext());
     }
 
     public RequestLoanLinkPage clickRequestLoanLink() {
         requestLoanLink.click();
         waitForJStoLoad();
-        return new RequestLoanLinkPage(driver);
+        return new RequestLoanLinkPage(driver, getContext());
     }
 
     public IndexPage clickLogOutLink() {
         logOutLink.click();
         waitForJStoLoad();
-        return new IndexPage(driver);
+        return new IndexPage(driver, getContext());
     }
 }

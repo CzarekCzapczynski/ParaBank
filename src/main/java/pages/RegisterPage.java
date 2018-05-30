@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.ITestContext;
 
 public class RegisterPage extends MainPage {
 //    public RegistrationAssertion registrationAssertion;
@@ -45,8 +46,8 @@ public class RegisterPage extends MainPage {
     @FindBy(css = "[href*='logout.htm']")
     private WebElement logoutLink;
 
-    public RegisterPage(WebDriver driver) {
-        super(driver);
+    public RegisterPage(WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
 //        registrationAssertion = new RegistrationAssertion(driver);
     }
@@ -109,7 +110,7 @@ public class RegisterPage extends MainPage {
     public RegisterSuccessfulPage clickRegisterButton() {
         registerButton.click();
         this.waitForJStoLoad();
-        return new RegisterSuccessfulPage(driver);
+        return new RegisterSuccessfulPage(driver, getContext());
     }
 
 }

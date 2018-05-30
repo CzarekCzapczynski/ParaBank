@@ -7,14 +7,16 @@ import scenarios.AddAccountScenario;
 import scenarios.LoginScenario;
 import scenarios.RegisterScenario;
 
+import java.net.MalformedURLException;
+
 public class FindTransactionTest extends MainTest{
 
     private AccountPage start;
 
     @BeforeClass
     @Parameters({"login", "password", "url"})
-    public void beforeClass(String login, String password, String url) {
-        before(url);
+    public void beforeClass(String login, String password, String url){
+        before(context, url);
         indexPage
                 .run(new RegisterScenario(
                         "test",

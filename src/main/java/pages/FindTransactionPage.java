@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.ITestContext;
 
 public class FindTransactionPage extends LoggedInPage{
     public FindTransactionAssertion findTransactionAssertion;
@@ -39,9 +40,9 @@ public class FindTransactionPage extends LoggedInPage{
     @FindBy(css = "[value='AMOUNT']")
     private WebElement findByAmountButton;
 
-    public FindTransactionPage(WebDriver driver) {
-        super(driver);
+    public FindTransactionPage(WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
-        findTransactionAssertion = new FindTransactionAssertion(driver);
+        findTransactionAssertion = new FindTransactionAssertion(driver, context);
     }
 }

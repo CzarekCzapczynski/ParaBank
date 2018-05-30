@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.ITestContext;
 
 
 public class OpenAccountPage extends LoggedInPage {
@@ -19,10 +21,10 @@ public class OpenAccountPage extends LoggedInPage {
     @FindBy(css = "#fromAccountId")
     private WebElement fromAccountId;
 
-    public OpenAccountPage(WebDriver driver) {
-        super(driver);
+    public OpenAccountPage(WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
-        openAccountAssertion = new OpenAccountAssertion(driver);
+        openAccountAssertion = new OpenAccountAssertion(driver, context);
     }
 
     public OpenAccountPage clickOpenNewAccountButton() {
@@ -32,12 +34,14 @@ public class OpenAccountPage extends LoggedInPage {
     }
 
     public OpenAccountPage setAccountType(String accountType) {
-        this.accountType.sendKeys(accountType);
+        Select accountTypeSelect = new Select(this.accountType);
+        accountTypeSelect.selectByValue(accountType);
         return this;
     }
 
-    public OpenAccountPage setFromAccountId(String fromAccount) {
-        fromAccountId.sendKeys(fromAccount);
+    public OpenAccountPage setFromAccountNumberByKey(String fromAccountKey) {
+        Select fromAccountSelect = new Select(this.fromAccountId);
+        fromAccountSelect.selectByValue(getContextAttribute(fromAccountKey));
         return this;
     }
 }

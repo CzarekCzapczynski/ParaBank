@@ -4,19 +4,22 @@ import pages.AccountPage;
 import pages.OpenAccountPage;
 
 public class AddAccountScenario implements Scenario<AccountPage, OpenAccountPage>{
+
     private String accountType;
-    private String FromAccountId;
+    private String fromAccountId;
+
 
     public AddAccountScenario(String accountType, String fromAccountId) {
         this.accountType = accountType;
-        this.FromAccountId = fromAccountId;
+        this.fromAccountId = fromAccountId;
     }
 
     public OpenAccountPage run(AccountPage entry) {
         return entry
+                .getAccountNumber(fromAccountId)
                 .leftMenu.clickOpenNewAccountLink()
                 .setAccountType(accountType)
-                .setFromAccountId(FromAccountId)
+                .setFromAccountNumberByKey(fromAccountId)
                 .clickOpenNewAccountButton();
     }
 }

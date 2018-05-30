@@ -1,4 +1,4 @@
-<suite name="Regression Suite">
+<suite name="Find Transaction Suite">
     <parameter name="url" value="http://parabank.parasoft.com"/>
     <parameter name="login" value="admin12"/>
     <parameter name="password" value="password1234"/>

@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.ITestContext;
 
 public class TransferPage extends LoggedInPage{
 
@@ -23,10 +24,10 @@ public class TransferPage extends LoggedInPage{
     @FindBy(css = "[value='Transfer']")
     private WebElement transferButton;
 
-    public TransferPage(WebDriver driver) {
-        super(driver);
+    public TransferPage(WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
-        transferAssertion = new TransferAssertion(driver);
+        transferAssertion = new TransferAssertion(driver, context);
     }
 
     public TransferPage setAmount(String amount) {

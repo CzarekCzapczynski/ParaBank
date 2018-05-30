@@ -8,13 +8,15 @@ import scenarios.LoginScenario;
 import scenarios.RegisterScenario;
 
 public class OpenNewAccountTest extends MainTest{
+    private final String ACCOUNT_TYPE = "SAVINGS";
+    private final String ACCOUNT_KEY = "accountKeyNumber";
 
     private AccountPage start;
 
     @BeforeClass
     @Parameters({"login", "password", "url"})
     public void beforeClass(String login, String password, String url) {
-        before(url);
+        before(context, url);
         indexPage
                 .run(new RegisterScenario(
                         "test",
@@ -48,23 +50,23 @@ public class OpenNewAccountTest extends MainTest{
     @Test
     public void shouldOpenAccount() {
         start
-            .run(new AddAccountScenario("SAVINGS", "16563"))
+            .run(new AddAccountScenario(ACCOUNT_TYPE, ACCOUNT_KEY))
             .openAccountAssertion.isNewAccountAdded();
 
     }
 
-    @Test
-    public void shouldNotLoginNotEnoughMoney() {
-        start
-            .run(new AddAccountScenario("SAVINGS", "17007"))
-                .leftMenu.clickAccountsOverviewLink()
-            .run(new AddAccountScenario("CHECKING", "17007"))
-                .leftMenu.clickAccountsOverviewLink()
-            .run(new AddAccountScenario("SAVINGS", "17007"))
-                .leftMenu.clickAccountsOverviewLink()
-            .run(new AddAccountScenario("CHECKING", "17007"))
-                .leftMenu.clickAccountsOverviewLink()
-            .run(new AddAccountScenario("SAVINGS", "17007"))
-            .openAccountAssertion.isNewAccountNotAdded();
-    }
+//    @Test
+//    public void shouldNotLoginNotEnoughMoney() {
+//        start
+//            .run(new AddAccountScenario("SAVINGS", "17007"))
+//                .leftMenu.clickAccountsOverviewLink()
+//            .run(new AddAccountScenario("CHECKING", "17007"))
+//                .leftMenu.clickAccountsOverviewLink()
+//            .run(new AddAccountScenario("SAVINGS", "17007"))
+//                .leftMenu.clickAccountsOverviewLink()
+//            .run(new AddAccountScenario("CHECKING", "17007"))
+//                .leftMenu.clickAccountsOverviewLink()
+//            .run(new AddAccountScenario("SAVINGS", "17007"))
+//            .openAccountAssertion.isNewAccountNotAdded();
+//    }
 }

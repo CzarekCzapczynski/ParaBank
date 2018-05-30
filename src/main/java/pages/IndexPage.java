@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.ITestContext;
 
 public class IndexPage extends MainPage {
     private String url;
@@ -23,17 +24,17 @@ public class IndexPage extends MainPage {
     private WebElement forgotLoginInfoLink;
 
 
-    public IndexPage(WebDriver driver, String url) {
-        super(driver);
+    public IndexPage(WebDriver driver, ITestContext context, String url) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
-        this.loginAssertion = new LoginAssertion(driver);
+        this.loginAssertion = new LoginAssertion(driver, context);
         this.url = url;
     }
 
-    public IndexPage(WebDriver driver) {
-        super(driver);
+    public IndexPage(WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
-        this.loginAssertion = new LoginAssertion(driver);
+        this.loginAssertion = new LoginAssertion(driver, context);
     }
 
     public IndexPage openIndexPage() {
@@ -55,18 +56,18 @@ public class IndexPage extends MainPage {
     public AccountPage clickLoginButton() {
         loginButton.click();
         this.waitForJStoLoad();
-        return new AccountPage(driver);
+        return new AccountPage(driver, getContext());
     }
 
     public RegisterPage clickRegisterLink() {
         registerLink.click();
         this.waitForJStoLoad();
-        return new RegisterPage(driver);
+        return new RegisterPage(driver, getContext());
     }
 
     public LookupPage clickForgotLoginInfoLink() {
         forgotLoginInfoLink.click();
         this.waitForJStoLoad();
-        return new LookupPage(driver);
+        return new LookupPage(driver, getContext());
     }
 }

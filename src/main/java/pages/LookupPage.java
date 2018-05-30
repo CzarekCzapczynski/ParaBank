@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.ITestContext;
 
 public class LookupPage extends MainPage{
     public LookupAssertion lookupAssertion;
@@ -34,10 +35,10 @@ public class LookupPage extends MainPage{
     @FindBy(css = "[value^='Find']")
     private WebElement findMyLoginInfoButton;
 
-    public LookupPage (WebDriver driver) {
-        super(driver);
+    public LookupPage (WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
-        lookupAssertion = new LookupAssertion(driver);
+        lookupAssertion = new LookupAssertion(driver, context);
     }
 
     public LookupPage setFirstName(String firstName){
