@@ -1,12 +1,21 @@
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import scenarios.RegisterScenario;
 
 public class RegistrationTest extends MainTest {
 
+    @BeforeClass
+    @Parameters({"url"})
+    public void beforeClass(String url){
+        before(context, url);
+        after();
+    }
+
     @Test
-    public void shouldRegister() {
+    @Parameters({"password"})
+    public void shouldRegister(String password) {
         String username = getRandomString(5);
-        String password = "pass1234";
 
         indexPage.run(new RegisterScenario(
                 "Ogórek",
@@ -23,8 +32,9 @@ public class RegistrationTest extends MainTest {
     }
 
     @Test
-    public void shouldNotRegisterUserExists() {
-        String password = "pass1234";
+    @Parameters({"password"})
+    public void shouldNotRegisterUserExists(String password) {
+        String username = getRandomString(5);
 
         indexPage.run(new RegisterScenario(
                 "Ogórek",
@@ -34,7 +44,7 @@ public class RegistrationTest extends MainTest {
                 "Pole",
                 "0000",
                 "11",
-                "ogor23",
+                username,
                 password,
                 password))
                 .leftMenu.clickLogOutLink()
@@ -46,15 +56,16 @@ public class RegistrationTest extends MainTest {
                 "Pole",
                 "0000",
                 "11",
-                "ogor23",
+                username,
                 password,
                 password))
                 .registerAssertion.isErrorDisplayed("This username already exists.");
     }
 
     @Test
-    public void shouldNotRegisterPasswordsDidNotMatch() {
-        String password = "pass1234";
+    @Parameters("password")
+    public void shouldNotRegisterPasswordsDidNotMatch(String password) {
+        String username = getRandomString(5);
 
         indexPage.run(new RegisterScenario(
                 "Ogórek",
@@ -64,15 +75,15 @@ public class RegistrationTest extends MainTest {
                 "Pole",
                 "0000",
                 "11",
-                "ogor3",
-                password ,
+                username,
+                password,
                 password + "a"))
                 .registerAssertion.isErrorDisplayed("Passwords did not match.");
     }
 
     @Test
-    public void shouldNotRegisterRequiredUsername() {
-        String password = "pass1234";
+    @Parameters("password")
+    public void shouldNotRegisterRequiredUsername(String password) {
 
         indexPage.run(new RegisterScenario(
                 "Ogórek",

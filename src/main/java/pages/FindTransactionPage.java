@@ -45,4 +45,39 @@ public class FindTransactionPage extends LoggedInPage{
         PageFactory.initElements(driver, this);
         findTransactionAssertion = new FindTransactionAssertion(driver, context);
     }
+
+    public FindTransactionPage setFindByDateInput(String findByDateInput) {
+        this.findByDateInput.sendKeys(findByDateInput);
+        return this;
+    }
+
+    public FindTransactionAssertion clickDateFindTransactionButton() {
+        this.dateFindTransactionButton.click();
+        return new FindTransactionAssertion(driver, getContext());
+    }
+
+    public FindTransactionPage setFindByDateRangeFromInput(String findByDateRangeFromInput) {
+        this.findByDateRangeFromInput.sendKeys(findByDateRangeFromInput);
+        return this;
+    }
+
+    public FindTransactionPage setFindByDateRangeToInput(String findByDateRangeToInput) {
+        this.findByDateRangeToInput.sendKeys(findByDateRangeToInput);
+        return this;
+    }
+
+    public FindTransactionAssertion clickDateRangeFindTransactionButton() {
+        this.dateRangeFindTransactionButton.click();
+        return new FindTransactionAssertion(driver, getContext());
+    }
+
+    public FindTransactionPage setFindByAmountInput(String findByAmountInput) {
+        this.findByAmountInput.sendKeys(findByAmountInput);
+        return this;
+    }
+
+    public FindTransactionAssertion clickFindByAmountButton() {
+        this.findByAmountButton.click();
+        return new FindTransactionAssertion(driver, getContext());
+    }
 }

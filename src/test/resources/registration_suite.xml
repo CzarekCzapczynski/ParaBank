@@ -1,0 +1,11 @@
+<suite name="Registration Suite">
+    <parameter name="url" value="http://parabank.parasoft.com"/>
+    <parameter name="login" value="registeruser1234"/>
+    <parameter name="password" value="password1234"/>
+
+    <test name="Registration Test">
+        <classes>
+            <class name="RegistrationTest"/>
+        </classes>
+    </test>
+</suite>

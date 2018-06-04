@@ -12,10 +12,11 @@ public class OpenNewAccountTest extends MainTest{
     private final String ACCOUNT_KEY = "accountKeyNumber";
 
     private AccountPage start;
+    private String login = getRandomString(5);
 
     @BeforeClass
-    @Parameters({"login", "password", "url"})
-    public void beforeClass(String login, String password, String url) {
+    @Parameters({"password", "url"})
+    public void beforeClass(String password, String url) {
         before(context, url);
         indexPage
                 .run(new RegisterScenario(
@@ -34,8 +35,8 @@ public class OpenNewAccountTest extends MainTest{
     }
 
     @BeforeMethod
-    @Parameters({"login", "password"})
-    public void beforeTest(String login, String password) {
+    @Parameters({"password"})
+    public void beforeTest(String password) {
         start = indexPage.run(new LoginScenario(login, password));
     }
 
@@ -52,7 +53,6 @@ public class OpenNewAccountTest extends MainTest{
         start
             .run(new AddAccountScenario(ACCOUNT_TYPE, ACCOUNT_KEY))
             .openAccountAssertion.isNewAccountAdded();
-
     }
 
 //    @Test

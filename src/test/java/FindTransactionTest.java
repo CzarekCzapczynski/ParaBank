@@ -8,14 +8,20 @@ import scenarios.LoginScenario;
 import scenarios.RegisterScenario;
 
 import java.net.MalformedURLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FindTransactionTest extends MainTest{
 
     private AccountPage start;
+    private String login = getRandomString(5);
+    private Date today = new Date();
+    private DateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
 
     @BeforeClass
-    @Parameters({"login", "password", "url"})
-    public void beforeClass(String login, String password, String url){
+    @Parameters({"password", "url"})
+    public void beforeClass(String password, String url){
         before(context, url);
         indexPage
                 .run(new RegisterScenario(
@@ -34,17 +40,37 @@ public class FindTransactionTest extends MainTest{
     }
 
     @BeforeMethod
-    @Parameters({"login", "password"})
-    public void beforeTest(String login, String password) {
+    @Parameters({"password"})
+    public void beforeTest(String password) {
         start = indexPage.run(new LoginScenario(login, password));
     }
 
     @Test
-    public void shouldFindTransactionById(){
+    public void shouldFindTransactionByDate(){
+
         start
             .leftMenu.clickfindTransactionLink()
-//            .setFindByTransactionIdInput("")
-        ;
+            .setFindByDateInput(sdf.format(today))
+            .clickDateFindTransactionButton()
+            .isTransactionFound();
     }
 
+    @Test
+    public void shouldFindTransactionByDateRange() {
+        start
+                .leftMenu.clickfindTransactionLink()
+                .setFindByDateRangeFromInput(sdf.format(today))
+                .setFindByDateRangeToInput(sdf.format(today))
+                .clickDateRangeFindTransactionButton()
+                .isTransactionFound();
+    }
+
+    @Test
+    public void shouldFindTransactionByAmount() {
+        start
+                .leftMenu.clickfindTransactionLink()
+                .setFindByAmountInput("100")
+                .clickFindByAmountButton()
+                .isTransactionFound();
+    }
 }
