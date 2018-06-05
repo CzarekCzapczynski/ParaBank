@@ -2,19 +2,22 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.AccountPage;
+import pages.FindTransactionPage;
 import scenarios.AddAccountScenario;
 import scenarios.LoginScenario;
 import scenarios.RegisterScenario;
+import scenarios.TransferFundsScenario;
 
-import java.net.MalformedURLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class FindTransactionTest extends MainTest{
+    private final String ACCOUNT_TYPE = "SAVINGS";
+    private final String ACCOUNT_KEY_TO = "accountKeyNumberTo";
+    private final String ACCOUNT_KEY_FROM = "accountKeyNumberFrom";
 
-    private AccountPage start;
+    private FindTransactionPage start;
     private String login = getRandomString(5);
     private Date today = new Date();
     private DateFormat sdf = new SimpleDateFormat("MM-dd-yyyy");
@@ -42,14 +45,17 @@ public class FindTransactionTest extends MainTest{
     @BeforeMethod
     @Parameters({"password"})
     public void beforeTest(String password) {
-        start = indexPage.run(new LoginScenario(login, password));
+        start = indexPage.run(new LoginScenario(login, password))
+                .leftMenu.clickAccountsOverviewLink()
+                .run(new AddAccountScenario(ACCOUNT_TYPE, ACCOUNT_KEY_TO))
+                .leftMenu.clickAccountsOverviewLink()
+                .run(new TransferFundsScenario("10", ACCOUNT_KEY_FROM, ACCOUNT_KEY_TO))
+                .leftMenu.clickFindTransactionLink();
     }
 
     @Test
     public void shouldFindTransactionByDate(){
-
         start
-            .leftMenu.clickfindTransactionLink()
             .setFindByDateInput(sdf.format(today))
             .clickDateFindTransactionButton()
             .isTransactionFound();
@@ -58,7 +64,6 @@ public class FindTransactionTest extends MainTest{
     @Test
     public void shouldFindTransactionByDateRange() {
         start
-                .leftMenu.clickfindTransactionLink()
                 .setFindByDateRangeFromInput(sdf.format(today))
                 .setFindByDateRangeToInput(sdf.format(today))
                 .clickDateRangeFindTransactionButton()
@@ -68,8 +73,7 @@ public class FindTransactionTest extends MainTest{
     @Test
     public void shouldFindTransactionByAmount() {
         start
-                .leftMenu.clickfindTransactionLink()
-                .setFindByAmountInput("100")
+                .setFindByAmountInput("10")
                 .clickFindByAmountButton()
                 .isTransactionFound();
     }

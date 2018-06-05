@@ -24,7 +24,7 @@ public class MainTest {
 //        capabilities.setCapability("version", "65");
 //        capabilities.setCapability("platform", "WINDOWS");
         try {
-            driver = new RemoteWebDriver(new URL("http://192.168.2.6:4444/wd/hub"), capabilities);
+            driver = new RemoteWebDriver(new URL("http://10.3.53.155:4444/wd/hub"), capabilities);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }

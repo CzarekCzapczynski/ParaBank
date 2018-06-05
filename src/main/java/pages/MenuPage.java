@@ -60,7 +60,7 @@ public class MenuPage extends MainPage{
         return new BillPayPage(driver, getContext());
     }
 
-    public FindTransactionPage clickfindTransactionLink() {
+    public FindTransactionPage clickFindTransactionLink() {
         findTransactionLink.click();
         waitForJStoLoad();
         return new FindTransactionPage(driver, getContext());

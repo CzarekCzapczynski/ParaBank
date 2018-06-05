@@ -16,7 +16,7 @@ public class AddAccountScenario implements Scenario<AccountPage, OpenAccountPage
 
     public OpenAccountPage run(AccountPage entry) {
         return entry
-                .getAccountNumber(fromAccountId)
+                .getAccountNumber(fromAccountId, 0)
                 .leftMenu.clickOpenNewAccountLink()
                 .setAccountType(accountType)
                 .setFromAccountNumberByKey(fromAccountId)

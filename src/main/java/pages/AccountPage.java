@@ -22,8 +22,8 @@ public class AccountPage extends LoggedInPage{
         loginAssertion = new LoginAssertion(driver, context);
     }
 
-    public AccountPage getAccountNumber(String accountKeyName) {
-        String accountValue = accountsElements.get(0).getText();
+    public AccountPage getAccountNumber(String accountKeyName, int keyNumber) {
+        String accountValue = accountsElements.get(keyNumber).getText();
         setContextAttribute(accountKeyName, accountValue);
         return this;
     }

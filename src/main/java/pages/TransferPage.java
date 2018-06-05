@@ -35,15 +35,15 @@ public class TransferPage extends LoggedInPage{
         return this;
     }
 
-    public TransferPage setFromAccountId(int fromAccountId) {
-        Select fromAccountIdList = (Select)this.fromAccountIdSelect;
-        fromAccountIdList.selectByIndex(fromAccountId);
+    public TransferPage setFromAccountId(String fromAccountId) {
+        Select fromAccountIdList = new Select(this.fromAccountIdSelect);
+        fromAccountIdList.selectByValue(getContextAttribute(fromAccountId));
         return this;
     }
 
-    public TransferPage setToAccountId(int toAccountId) {
-        Select toAccountIdList = (Select)this.toAccountIdSelect; 
-        toAccountIdList.selectByIndex(toAccountId);
+    public TransferPage setToAccountId(String toAccountId) {
+        Select toAccountIdList = new Select(this.toAccountIdSelect);
+        toAccountIdList.selectByValue(getContextAttribute(toAccountId));
         return this;
     }
 
